@@ -70,18 +70,22 @@ def check_subsequence(sub, step):
     return position
 
 def main():
-    A = input('Введите числовую последовательность: ')
-    A_leght = len(A)
-    for step in range (1, A_leght): #пробегаемся по последовательности увеличивая шаг
-        num = check_subsequence(A, step) # проверяем, можно ли уследить последовательность чисел
-        if num:
+    while True:
+        A = input('Введите числовую последовательность: ')
+        if A.isdigit():
+            A_leght = len(A)
+            for step in range (1, A_leght): #пробегаемся по последовательности увеличивая шаг
+                num = check_subsequence(A, step) # проверяем, можно ли уследить последовательность чисел
+                if num:
+                    break
+            else: # если ни для какого шага не обнаружили последовательность
+                if A[0] != '0': # если не начинается с нуля, то вычисляем позицию числа
+                    num = get_position(int(A)) + 1
+                else: # добавляем 1 и вычисляем позицию нового числа
+                    num = get_position(int('1' + A)) + 1
+            print(num)
+        else:
             break
-    else: # если ни для какого шага не обнаружили последовательность
-        if A[0] != '0': # если не начинается с нуля, то вычисляем позицию числа
-            num = get_position(int(A)) + 1
-        else: # добавляем 1 и вычисляем позицию нового числа
-            num = get_position(int('1' + A)) + 1
-    print(num)
 
 if __name__ == '__main__':
     main()
